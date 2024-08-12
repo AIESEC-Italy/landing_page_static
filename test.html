@@ -1,0 +1,62 @@
+
+          <form id="ge_signup_form" action="javascript:validate_form();">
+						<div class="column-row">
+              <input id="first_name_field" type="text" name="name" placeholder="First Name">
+              <input id="last_name_field" type="text" name="name" placeholder="Last Name">
+						</div>
+            <div class="column-row">
+              <input id="email_signup_field" type="text" name="name" placeholder="Email">             
+              <input id="password_signup_field" type="password" name="password" placeholder="Password">
+            </div>
+            <div class="column-row" style="margin-top: 0px;">   
+              <input id="phone_field" type="text" name="name" placeholder="Phone">
+              <input id="dob_field" type="date" name="name" placeholder="Date of Birth">
+            </div>
+            <div class="column-row" style="margin-top: 0px;">                  
+                <select id="gender_options" placeholder="Gender" name="Gender">
+                    <option value="" disabled="" selected="">Gender</option>
+                    <option value="Male">Male</option>
+                    <option value="Female">Female</option>
+                </select>
+                <input id="graduation_year_field" type="number" name="name" placeholder="Graduation Year">
+            </div>
+            <div class="column-row" style="margin-top: 0px;">
+                <select id="faculty_options" placeholder="Faculty" name="faculty">
+                    <option value="" disabled="" selected="">Faculty</option>
+                </select>                       
+                <select id="campus_options" placeholder="Campus" name="campus">
+                    <option value="" disabled="" selected="">Campus</option>
+                </select>
+            </div>
+            <div class="column-row" style="margin-top: 0px;">
+                <select id="product_options" placeholder="Product" name="Product">
+                    <option value="" disabled="" selected="">Product</option>
+                </select>
+                <select id="apply_reasons_options" placeholder="Campus" name="reason">
+                    <option value="" disabled="" selected="">Top reason for you to apply</option>
+                    <option value="Want to Volunteer/Intern abroad">Want to Volunteer/Intern abroad</option>
+                    <option value="Want to develop my leadership">Want to develop my leadership</option>
+                    <option value="Want to meet new people and cultures">Want to meet new people and cultures</option>
+                    <option value="Other">Other</option>
+                </select>
+            </div>
+            <div class="column-row" style="margin-top: 0px;">
+              <select id="prevent_reasons_options" placeholder="top reason that might prevent you from going on exchange" name="referral">
+                  <option value="" disabled="" selected="">Top reason that might prevent you from going on exchange</option>
+                  <option value="Parent Issues">Parent Issues</option>
+                  <option value="Too Expensive">Too Expensive</option>
+                  <option value="Can not See any benefit from going on exchange">Can not See any benefit from going on exchange</option>
+                  <option value="I am not certain about AIESEC">I am not certain about AIESEC</option>
+                  <option value="Can't find relevant time to travel">Can't find relevant time to travel</option>
+                  <option value="Can't travel beacause of COVID-19">Can't travel beacause of COVID-19</option>
+                </select>
+                <input id="aiesec_representative" type="text" name="aiesec_representative" placeholder="AIESEC Representative">
+            </div>
+            <div class="column-row" style="margin-top: 0px;">           
+              <span style="text-align: right;"><button id="signupbutton" class="button-secondary" style="text-align: right;" onclick="validate_form();">Confirm</button></span>
+            </div>
+					</form>
+          <div id="form_msg" style="display: none; border: 4px;">
+                <span id="sign_up_error_msg" style="color: red;"></span>
+                <div class="alert__close" onclick="document.getElementById('form_msg').style.display = 'none';">×</div>
+          </div>
