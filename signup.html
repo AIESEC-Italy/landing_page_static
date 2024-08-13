@@ -160,497 +160,497 @@
     <script src="assets/vendors/jquery/jquery.min.js"></script>
     <script src="assets/vendors/odometer/odometer.min.js"></script>
     <script>
-      var endpoint = "http://127.0.0.1:8000/"
-let campaign_id = null;
+      var endpoint = "https://cortex.aiesec.it/"
+      let campaign_id = null;
 
 
-function isNumeric(n) {
-  return !isNaN(parseFloat(n)) && isFinite(n);
-}
+      function isNumeric(n) {
+        return !isNaN(parseFloat(n)) && isFinite(n);
+      }
 
-function validate_signup(data){
-    console.log(data)
-    $('#ogx_signup_form *').prop("disabled", false);
-    if(data['data']['createPhysicalOgxLead'] != null){
-        window.location.href = '/thankyou_gt.html';
-    }
-    // Show the user that he Applied! Congrats!
-}
-
-
-let ref;
-
-function signup_request(){
-    console.log(ref)
-    var campus_options = document.getElementById('campus_options')
-    var campus = campus_options.options[campus_options.selectedIndex].value;
-    console.log(campus)
-    var faculty_options = document.getElementById('faculty_options')
-    var faculty = faculty_options.options[faculty_options.selectedIndex].value;
-    console.log(faculty)
-    
-    var product_options = document.getElementById('product_options')
-    var product = product_options.options[product_options.selectedIndex].value;
-    var referral = ref;
-    console.log(product)
-
-    console.log(referral)
-    
-    var gender_options = document.getElementById('gender_options')
-    var gender = gender_options.options[gender_options.selectedIndex].value;
-    console.log(gender)
-    
-    var reason_to_apply_options = document.getElementById('apply_reasons_options')
-    var reason_to_apply = reason_to_apply_options.options[reason_to_apply_options.selectedIndex].value;
-    console.log(reason_to_apply)
-    
-    var reason_to_prevent_options = document.getElementById('prevent_reasons_options')
-    var reason_to_prevent = reason_to_prevent_options.options[reason_to_prevent_options.selectedIndex].value;
-
-    console.log(reason_to_prevent)
-    
-    var query = ` mutation CreateOgxLead($firstname: String!, $lastname: String!, $email: String!, $password: String!, $phone: String!, $campus: ID!, $faculty: ID!, $referral: ID!,$dob: Date!, $ogxBranch: Int!, $graduationYear: Int!, $gender: String!,$campaign_id: ID!, $apply_reason: String!, $prevent_resaon: String!) {
-    createPhysicalOgxLead(firstName:$firstname,lastName:$lastname,email:$email,password:$password,phone:$phone,campus:$campus,faculty:$faculty,referral:$referral,dob:$dob, ogxBranch:$ogxBranch,graduationYear:$graduationYear,  gender:$gender,marketingCampaign:$campaign_id, reasonToApply:$apply_reason, reasonToPrevent:$prevent_resaon)
-   {
-        applicant {
-            id
-            firstName
-            lastName
-            email
-            phone
-            expaId
-            dob
-            graduationYear
-            gender
-            createdAt
-            reasonToApply
-            reasonToPrevent
-        }
-    }
-}`;
-console.log(document.getElementById('dob_field').value)
-console.log(campaign_id)
-
-        var variables = { firstname: document.getElementById('first_name_field').value,
-                          lastname: document.getElementById('last_name_field').value,
-                          email: document.getElementById('email_signup_field').value,
-                          password: document.getElementById('password_signup_field').value,
-                          phone: document.getElementById('phone_field').value,
-                          campus: campus,
-                          faculty: faculty,
-                          referral: referral,
-                          dob: document.getElementById('dob_field').value,
-                          ogxBranch: parseInt(product),
-                          graduationYear: parseInt(document.getElementById('graduation_year_field').value),
-                          gender: gender,
-                          campaign_id:campaign_id,
-                          apply_reason:reason_to_apply,
-                          prevent_resaon:reason_to_prevent,
-                        },
-            
-
-        data_ = fetch(endpoint + '/graphql', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-            'Accept': 'application/json',
-          },
-          body: JSON.stringify({
-            query,
-            variables,
-          })
-        })
-          .then(r => r.json())
-          .then(data => validate_signup(data))
-          .catch(error => console.error('Error:', error));
-}
+      function validate_signup(data){
+          console.log(data)
+          $('#ogx_signup_form *').prop("disabled", false);
+          if(data['data']['createPhysicalOgxLead'] != null){
+              window.location.href = '/thankyou_gt.html';
+          }
+          // Show the user that he Applied! Congrats!
+      }
 
 
-function validate_email(data){
-    result = data['data'].checkOgxEmailExists
-    if (result == false){
-        signup_request()
-    }
-    else{
-        var msg = "The email is registered before, please sign in.";
-        document.getElementById('sign_up_error_msg').innerHTML = msg;
-        document.getElementById('form_msg').style.display = "block";
-        $('#ogx_signup_form *').prop("disabled", false);
-    }
-}
+      let ref;
 
-function unique_email(email){
-    //document.getElementById('ge_signup_form').style.display = 'none';
-    $("#ogx_signup_form *").attr("disabled", "disabled").off('click');
-      var query = `query CheckOgxEmailExists($email: String!) {
-            checkOgxEmailExists(email:$email)
+      function signup_request(){
+          console.log(ref)
+          var campus_options = document.getElementById('campus_options')
+          var campus = campus_options.options[campus_options.selectedIndex].value;
+          console.log(campus)
+          var faculty_options = document.getElementById('faculty_options')
+          var faculty = faculty_options.options[faculty_options.selectedIndex].value;
+          console.log(faculty)
+          
+          var product_options = document.getElementById('product_options')
+          var product = product_options.options[product_options.selectedIndex].value;
+          var referral = ref;
+          console.log(product)
+
+          console.log(referral)
+          
+          var gender_options = document.getElementById('gender_options')
+          var gender = gender_options.options[gender_options.selectedIndex].value;
+          console.log(gender)
+          
+          var reason_to_apply_options = document.getElementById('apply_reasons_options')
+          var reason_to_apply = reason_to_apply_options.options[reason_to_apply_options.selectedIndex].value;
+          console.log(reason_to_apply)
+          
+          var reason_to_prevent_options = document.getElementById('prevent_reasons_options')
+          var reason_to_prevent = reason_to_prevent_options.options[reason_to_prevent_options.selectedIndex].value;
+
+          console.log(reason_to_prevent)
+          
+          var query = ` mutation CreateOgxLead($firstname: String!, $lastname: String!, $email: String!, $password: String!, $phone: String!, $campus: ID!, $faculty: ID!, $referral: ID!,$dob: Date!, $ogxBranch: Int!, $graduationYear: Int!, $gender: String!,$campaign_id: ID!, $apply_reason: String!, $prevent_resaon: String!) {
+          createPhysicalOgxLead(firstName:$firstname,lastName:$lastname,email:$email,password:$password,phone:$phone,campus:$campus,faculty:$faculty,referral:$referral,dob:$dob, ogxBranch:$ogxBranch,graduationYear:$graduationYear,  gender:$gender,marketingCampaign:$campaign_id, reasonToApply:$apply_reason, reasonToPrevent:$prevent_resaon)
+        {
+              applicant {
+                  id
+                  firstName
+                  lastName
+                  email
+                  phone
+                  expaId
+                  dob
+                  graduationYear
+                  gender
+                  createdAt
+                  reasonToApply
+                  reasonToPrevent
+              }
+          }
       }`;
-        var variables = { email: email},
+      console.log(document.getElementById('dob_field').value)
+      console.log(campaign_id)
+
+              var variables = { firstname: document.getElementById('first_name_field').value,
+                                lastname: document.getElementById('last_name_field').value,
+                                email: document.getElementById('email_signup_field').value,
+                                password: document.getElementById('password_signup_field').value,
+                                phone: document.getElementById('phone_field').value,
+                                campus: campus,
+                                faculty: faculty,
+                                referral: referral,
+                                dob: document.getElementById('dob_field').value,
+                                ogxBranch: parseInt(product),
+                                graduationYear: parseInt(document.getElementById('graduation_year_field').value),
+                                gender: gender,
+                                campaign_id:campaign_id,
+                                apply_reason:reason_to_apply,
+                                prevent_resaon:reason_to_prevent,
+                              },
+                  
+
+              data_ = fetch(endpoint + '/graphql', {
+                method: 'POST',
+                headers: {
+                  'Content-Type': 'application/json',
+                  'Accept': 'application/json',
+                },
+                body: JSON.stringify({
+                  query,
+                  variables,
+                })
+              })
+                .then(r => r.json())
+                .then(data => validate_signup(data))
+                .catch(error => console.error('Error:', error));
+      }
+
+
+      function validate_email(data){
+          result = data['data'].checkOgxEmailExists
+          if (result == false){
+              signup_request()
+          }
+          else{
+              var msg = "The email is registered before, please sign in.";
+              document.getElementById('sign_up_error_msg').innerHTML = msg;
+              document.getElementById('form_msg').style.display = "block";
+              $('#ogx_signup_form *').prop("disabled", false);
+          }
+      }
+
+      function unique_email(email){
+          //document.getElementById('ge_signup_form').style.display = 'none';
+          $("#ogx_signup_form *").attr("disabled", "disabled").off('click');
+            var query = `query CheckOgxEmailExists($email: String!) {
+                  checkOgxEmailExists(email:$email)
+            }`;
+              var variables = { email: email},
+                  
+
+              data_ = fetch(endpoint + '/graphql', {
+                method: 'POST',
+                headers: {
+                  'Content-Type': 'application/json',
+                  'Accept': 'application/json',
+                },
+                body: JSON.stringify({
+                  query,
+                  variables,
+                })
+              })
+                .then(r => r.json())
+                .then(data => validate_email(data));
+          
+      }
+
+      function validate_form(){
+          // Validate form inputs here first before calling !
+          document.getElementById('form_msg').style.display = "none";
+          var upperCase= new RegExp('[A-Z]');
+          var lowerCase= new RegExp('[a-z]');
+          var numbers = new RegExp('[0-9]');
+          var firstname = document.getElementById('first_name_field').value;
+          var lastname = document.getElementById('last_name_field').value;
+          var email = document.getElementById('email_signup_field').value;
+          var password = document.getElementById('password_signup_field').value;
+          var phone = document.getElementById('phone_field').value;         
+          var dob = document.getElementById('dob_field').value;
+          var graduation_year = document.getElementById('graduation_year_field').value;
+          var campus_options = document.getElementById('campus_options')
+          var campus = campus_options.options[campus_options.selectedIndex].value;
+          
+          var faculty_options = document.getElementById('faculty_options')
+          var faculty = faculty_options.options[faculty_options.selectedIndex].value;
+          
+          var product_options = document.getElementById('product_options')
+          var product = product_options.options[product_options.selectedIndex].value;
+          
+          var gender_options = document.getElementById('gender_options')
+          var gender = gender_options.options[gender_options.selectedIndex].value;
+          if (firstname.length <= 0) {
+              var msg = "Please Enter Your First Name";
+              document.getElementById('sign_up_error_msg').innerHTML = msg;
+              document.getElementById('form_msg').style.display = "block";
+              return ;
+            }
+          if (lastname.length <= 0) {
+              var msg = "Please Enter Your Last Name";
+              document.getElementById('sign_up_error_msg').innerHTML = msg;
+              document.getElementById('form_msg').style.display = "block";
+              return ;
+            }
+          if (email.length < 4) {
+              var msg = "Please Enter a valid email.";
+              document.getElementById('sign_up_error_msg').innerHTML = msg;
+              document.getElementById('form_msg').style.display = "block";
+              return ;
+            }
+          if (email.includes(' ')){
+              var msg = "Please Remove Spaces from your email!";
+              document.getElementById('sign_up_error_msg').innerHTML = msg;
+              document.getElementById('form_msg').style.display = "block";
+              return ;
+          }
+          if (!email.includes('@') || !email.includes('.')){
+              var msg = "Please enter a valid email!";
+              document.getElementById('sign_up_error_msg').innerHTML = msg;
+              document.getElementById('form_msg').style.display = "block";
+              return ;
+          }
+          if (password.length <= 8) {
+              var msg = "Your password must be more than 8 characters";
+              document.getElementById('sign_up_error_msg').innerHTML = msg;
+              document.getElementById('form_msg').style.display = "block";
+              return ;
+            }
+          
+          var numeric = false;
+          var upperCase = false;
+          var lowerCase = false;
+          var i=0;
+          var character='';
+          var specials = ['"', '!', '"', '#', '$', '%', '&', '(', ')', '*', '+', ',', '-', '.', '/', ':', ';', '<', '=', '>', '?', '@', '[', "'\'", ']', '^', '_', '`', '{', '|', '}', '~' , '"']
+          while (i < password.length){
+              character = password.charAt(i);
+              if (character != ' '){
+                  if (isNumeric(character)){
+                  numeric = true;
+                  }
+                  else{
+                      if (!specials.includes(character)){
+                          if (character == character.toUpperCase()) {
+                              upperCase = true;
+                          }
+                          if (character == character.toLowerCase()){
+                              lowerCase = true;
+                          }
+                      }
+                  }
+              }
+              
+              i++;
+          }
+          if ( !numeric || !upperCase || !lowerCase ){
+              var msg = "Your password must contain a mixture of upper and lower case letters and at least one number";
+              document.getElementById('sign_up_error_msg').innerHTML = msg;
+              document.getElementById('form_msg').style.display = "block";
+              return ; 
+          }
+          if (phone.length != 11) {
+              var msg = "Please enter a valid 11 digits phone number.";
+              document.getElementById('sign_up_error_msg').innerHTML = msg;
+              document.getElementById('form_msg').style.display = "block";
+              return ;
+            }
+          if (dob.length <= 6) {
+              var msg = "Please enter a valid date of birth.";
+              document.getElementById('sign_up_error_msg').innerHTML = msg;
+              document.getElementById('form_msg').style.display = "block";
+              return ;
+            }
+          if (calculate_age(new Date(document.getElementById('dob_field').value)) > 30 || calculate_age(new Date(document.getElementById('dob_field').value)) < 18 ){
+              var msg = "You need to be between the age of 18 and 30 to apply."
+              document.getElementById('sign_up_error_msg').innerHTML = msg;
+              document.getElementById('form_msg').style.display = "block";
+              return ;
+          }
+          if (graduation_year.length != 4) {
+              var msg = "Please enter a valid graduation year."
+              document.getElementById('sign_up_error_msg').innerHTML = msg;
+              document.getElementById('form_msg').style.display = "block";
+              return ;
+            }
+          if (campus == ""){
+              var msg = "Please choose your University"
+              document.getElementById('sign_up_error_msg').innerHTML = msg;
+              document.getElementById('form_msg').style.display = "block";
+              return ;
+          }
+          if (faculty == ""){
+              var msg = "Please choose your Faculty"
+              document.getElementById('sign_up_error_msg').innerHTML = msg;
+              document.getElementById('form_msg').style.display = "block";
+              return ;
+          }
+          if (gender == ""){
+              var msg = "Please choose your Gender"
+              document.getElementById('sign_up_error_msg').innerHTML = msg;
+              document.getElementById('form_msg').style.display = "block";
+              return ;
+          }
+          if (product == ""){
+              var msg = "Please choose your Product"
+              document.getElementById('sign_up_error_msg').innerHTML = msg;
+              document.getElementById('form_msg').style.display = "block";
+              return ;
+          }
+          unique_email(email);
+          
+      }
+
+      function inject_campuses(data){
+          var campuses = data['data']['allCampuses']['edges'];
+          campuses.forEach(function(element) {
+              var $log = $( "#campus_options" ),
+              // str = '<option value="' + element['node'].id + '">' + element['node'].name + '</option>',
+              html = $.parseHTML( str ),
+              nodeNames = [];
+              $log.append( html );
+          });
+        }
             
+      function inject_faculties(data){
+          var faculties = data['data']['allFaculties']['edges'];
+          faculties.forEach(function(element) {
+              var $log = $( "#faculty_options" ),
+              str = '<option value="' + element['node'].id + '">' + element['node'].name + '</option>',
+              html = $.parseHTML( str ),
+              nodeNames = [];
+              $log.append( html );
+          });
+      }
 
-        data_ = fetch(endpoint + '/graphql', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-            'Accept': 'application/json',
-          },
-          body: JSON.stringify({
-            query,
-            variables,
-          })
-        })
-          .then(r => r.json())
-          .then(data => validate_email(data));
-    
-}
 
-function validate_form(){
-    // Validate form inputs here first before calling !
-    document.getElementById('form_msg').style.display = "none";
-    var upperCase= new RegExp('[A-Z]');
-    var lowerCase= new RegExp('[a-z]');
-    var numbers = new RegExp('[0-9]');
-    var firstname = document.getElementById('first_name_field').value;
-    var lastname = document.getElementById('last_name_field').value;
-    var email = document.getElementById('email_signup_field').value;
-    var password = document.getElementById('password_signup_field').value;
-    var phone = document.getElementById('phone_field').value;         
-    var dob = document.getElementById('dob_field').value;
-    var graduation_year = document.getElementById('graduation_year_field').value;
-    var campus_options = document.getElementById('campus_options')
-    var campus = campus_options.options[campus_options.selectedIndex].value;
-    
-    var faculty_options = document.getElementById('faculty_options')
-    var faculty = faculty_options.options[faculty_options.selectedIndex].value;
-    
-    var product_options = document.getElementById('product_options')
-    var product = product_options.options[product_options.selectedIndex].value;
-    
-    var gender_options = document.getElementById('gender_options')
-    var gender = gender_options.options[gender_options.selectedIndex].value;
-    if (firstname.length <= 0) {
-        var msg = "Please Enter Your First Name";
-        document.getElementById('sign_up_error_msg').innerHTML = msg;
-        document.getElementById('form_msg').style.display = "block";
-        return ;
-      }
-    if (lastname.length <= 0) {
-        var msg = "Please Enter Your Last Name";
-        document.getElementById('sign_up_error_msg').innerHTML = msg;
-        document.getElementById('form_msg').style.display = "block";
-        return ;
-      }
-    if (email.length < 4) {
-        var msg = "Please Enter a valid email.";
-        document.getElementById('sign_up_error_msg').innerHTML = msg;
-        document.getElementById('form_msg').style.display = "block";
-        return ;
-      }
-    if (email.includes(' ')){
-        var msg = "Please Remove Spaces from your email!";
-        document.getElementById('sign_up_error_msg').innerHTML = msg;
-        document.getElementById('form_msg').style.display = "block";
-        return ;
-    }
-    if (!email.includes('@') || !email.includes('.')){
-        var msg = "Please enter a valid email!";
-        document.getElementById('sign_up_error_msg').innerHTML = msg;
-        document.getElementById('form_msg').style.display = "block";
-        return ;
-    }
-    if (password.length <= 8) {
-        var msg = "Your password must be more than 8 characters";
-        document.getElementById('sign_up_error_msg').innerHTML = msg;
-        document.getElementById('form_msg').style.display = "block";
-        return ;
-      }
-    
-    var numeric = false;
-    var upperCase = false;
-    var lowerCase = false;
-    var i=0;
-    var character='';
-    var specials = ['"', '!', '"', '#', '$', '%', '&', '(', ')', '*', '+', ',', '-', '.', '/', ':', ';', '<', '=', '>', '?', '@', '[', "'\'", ']', '^', '_', '`', '{', '|', '}', '~' , '"']
-    while (i < password.length){
-        character = password.charAt(i);
-        if (character != ' '){
-            if (isNumeric(character)){
-            numeric = true;
-            }
-            else{
-                if (!specials.includes(character)){
-                    if (character == character.toUpperCase()) {
-                        upperCase = true;
-                    }
-                    if (character == character.toLowerCase()){
-                        lowerCase = true;
-                    }
+      function fetch_campuses(){
+          var query = `query Myquery {
+            allCampuses
+            {
+              edges
+              {
+                node
+                {
+                  id
+                  name
+                  alignmentId
                 }
+              }
             }
-        }
-        
-        i++;
-    }
-    if ( !numeric || !upperCase || !lowerCase ){
-        var msg = "Your password must contain a mixture of upper and lower case letters and at least one number";
-        document.getElementById('sign_up_error_msg').innerHTML = msg;
-        document.getElementById('form_msg').style.display = "block";
-        return ; 
-    }
-    if (phone.length != 11) {
-        var msg = "Please enter a valid 11 digits phone number.";
-        document.getElementById('sign_up_error_msg').innerHTML = msg;
-        document.getElementById('form_msg').style.display = "block";
-        return ;
-      }
-    if (dob.length <= 6) {
-        var msg = "Please enter a valid date of birth.";
-        document.getElementById('sign_up_error_msg').innerHTML = msg;
-        document.getElementById('form_msg').style.display = "block";
-        return ;
-      }
-    if (calculate_age(new Date(document.getElementById('dob_field').value)) > 30 || calculate_age(new Date(document.getElementById('dob_field').value)) < 18 ){
-        var msg = "You need to be between the age of 18 and 30 to apply."
-        document.getElementById('sign_up_error_msg').innerHTML = msg;
-        document.getElementById('form_msg').style.display = "block";
-        return ;
-    }
-    if (graduation_year.length != 4) {
-        var msg = "Please enter a valid graduation year."
-        document.getElementById('sign_up_error_msg').innerHTML = msg;
-        document.getElementById('form_msg').style.display = "block";
-        return ;
-      }
-    if (campus == ""){
-        var msg = "Please choose your University"
-        document.getElementById('sign_up_error_msg').innerHTML = msg;
-        document.getElementById('form_msg').style.display = "block";
-        return ;
-    }
-    if (faculty == ""){
-        var msg = "Please choose your Faculty"
-        document.getElementById('sign_up_error_msg').innerHTML = msg;
-        document.getElementById('form_msg').style.display = "block";
-        return ;
-    }
-    if (gender == ""){
-        var msg = "Please choose your Gender"
-        document.getElementById('sign_up_error_msg').innerHTML = msg;
-        document.getElementById('form_msg').style.display = "block";
-        return ;
-    }
-    if (product == ""){
-        var msg = "Please choose your Product"
-        document.getElementById('sign_up_error_msg').innerHTML = msg;
-        document.getElementById('form_msg').style.display = "block";
-        return ;
-    }
-    unique_email(email);
-    
-}
+          }`;
 
-function inject_campuses(data){
-    var campuses = data['data']['allCampuses']['edges'];
-    campuses.forEach(function(element) {
-        var $log = $( "#campus_options" ),
-        // str = '<option value="' + element['node'].id + '">' + element['node'].name + '</option>',
-        html = $.parseHTML( str ),
-        nodeNames = [];
-        $log.append( html );
-    });
-  }
-       
-function inject_faculties(data){
-    var faculties = data['data']['allFaculties']['edges'];
-    faculties.forEach(function(element) {
-        var $log = $( "#faculty_options" ),
-        str = '<option value="' + element['node'].id + '">' + element['node'].name + '</option>',
-        html = $.parseHTML( str ),
-        nodeNames = [];
-        $log.append( html );
-    });
-}
+          data_ = fetch(endpoint + '/graphql', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              'Accept': 'application/json',
+            },
+            body: JSON.stringify({
+              query,
+            })
+          })
+            .then(r => r.json())
+            .then(data => inject_campuses(data));
+          //console.log(data_);
+      }
+      function fetch_faculties(){
+          var query = `query Myquery {
+            allFaculties
+            {
+              edges
+              {
+                node
+                {
+                  id
+                  name
+                }
+              }
+            }
+          }`;
 
+          data_ = fetch(endpoint + '/graphql', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              'Accept': 'application/json',
+            },
+            body: JSON.stringify({
+              query,
+            })
+          })
+            .then(r => r.json())
+            .then(data => inject_faculties(data));
+          //console.log(data_);
+      }
 
-function fetch_campuses(){
-    var query = `query Myquery {
-      allCampuses
-      {
-        edges
-        {
-          node
-          {
-            id
-            name
-            alignmentId
+      function inject_campaign(data){
+          var now = new Date();
+        now.setHours(0,0,0,0);
+        ref = data['data']['getCampaign']['campaignSource'][0]['id'];
+        console.log(ref)
+        expiry_date = data['data']['getCampaign']['endDate'];
+          start_date = data['data']['getCampaign']['startDate'];
+          var CurrentDate = new Date();
+          expiry_date = new Date(expiry_date);
+          start_date = new Date(start_date);
+
+          if(expiry_date < CurrentDate){
+              window.location.href = '/index.html';
           }
-        }
-      }
-    }`;
-
-    data_ = fetch(endpoint + '/graphql', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'Accept': 'application/json',
-      },
-      body: JSON.stringify({
-        query,
-      })
-    })
-      .then(r => r.json())
-      .then(data => inject_campuses(data));
-    //console.log(data_);
-}
-function fetch_faculties(){
-    var query = `query Myquery {
-      allFaculties
-      {
-        edges
-        {
-          node
-          {
-            id
-            name
+          if(CurrentDate < start_date){
+              window.location.href = '/index.html';
           }
-        }
+          var campuses = data['data']['getCampaign']['campuses'];
+          console.log(campuses)
+          campuses.forEach(function(element) {
+            console.log(element)
+              var $log = $( "#campus_options" ),
+              str = '<option value="' + element.id + '">' + element.name + '</option>',
+              html = $.parseHTML( str ),
+              nodeNames = [];
+              $log.append( html );
+          });
+          var products = data['data']['getCampaign']['products'];
+          products.forEach(function(element) {
+            console.log(element.expaId);
+              var $log = $( "#product_options" ),
+              str = '<option value="' + element.expaId + '">' + element.name + '</option>',
+              html = $.parseHTML( str ),
+              nodeNames = [];
+              $log.append( html );
+          });
       }
-    }`;
+      function fetch_campaign(campaign_id){
+          var query = `query Myquery($id: ID!) {
+            getCampaign(id:$id)
+            {
+              id
+              title
+              startDate
+              endDate
+              campuses
+              {
+                id
+                name
+              }
+              campaignSource {
+                  id
+                  name
+                  formValue
+              }
+              products
+              {
+                id
+                expaId
+                name
+              }
+            }
+          }`;
+          
+          var variables = { id: campaign_id},
 
-    data_ = fetch(endpoint + '/graphql', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'Accept': 'application/json',
-      },
-      body: JSON.stringify({
-        query,
-      })
-    })
-      .then(r => r.json())
-      .then(data => inject_faculties(data));
-    //console.log(data_);
-}
-
-function inject_campaign(data){
-    var now = new Date();
-  now.setHours(0,0,0,0);
-  ref = data['data']['getCampaign']['campaignSource'][0]['id'];
-  console.log(ref)
-  expiry_date = data['data']['getCampaign']['endDate'];
-    start_date = data['data']['getCampaign']['startDate'];
-    var CurrentDate = new Date();
-    expiry_date = new Date(expiry_date);
-    start_date = new Date(start_date);
-
-    if(expiry_date < CurrentDate){
-        window.location.href = '/index.html';
-    }
-    if(CurrentDate < start_date){
-        window.location.href = '/index.html';
-    }
-    var campuses = data['data']['getCampaign']['campuses'];
-    console.log(campuses)
-    campuses.forEach(function(element) {
-      console.log(element)
-        var $log = $( "#campus_options" ),
-        str = '<option value="' + element.id + '">' + element.name + '</option>',
-        html = $.parseHTML( str ),
-        nodeNames = [];
-        $log.append( html );
-    });
-    var products = data['data']['getCampaign']['products'];
-    products.forEach(function(element) {
-      console.log(element.expaId);
-        var $log = $( "#product_options" ),
-        str = '<option value="' + element.expaId + '">' + element.name + '</option>',
-        html = $.parseHTML( str ),
-        nodeNames = [];
-        $log.append( html );
-    });
-}
-function fetch_campaign(campaign_id){
-    var query = `query Myquery($id: ID!) {
-      getCampaign(id:$id)
-      {
-        id
-        title
-        startDate
-        endDate
-        campuses
-        {
-          id
-          name
-        }
-        campaignSource {
-            id
-            name
-            formValue
-        }
-        products
-        {
-          id
-          expaId
-          name
-        }
+          data_ = fetch(endpoint + '/graphql', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              'Accept': 'application/json',
+            },
+            body: JSON.stringify({
+              query,
+              variables,
+            })
+          })
+            .then(r => r.json())
+            .then(data => inject_campaign(data));
+          //console.log(data_);
       }
-    }`;
-    
-    var variables = { id: campaign_id},
 
-    data_ = fetch(endpoint + '/graphql', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'Accept': 'application/json',
-      },
-      body: JSON.stringify({
-        query,
-        variables,
-      })
-    })
-      .then(r => r.json())
-      .then(data => inject_campaign(data));
-    //console.log(data_);
-}
+      function calculate_age(dob) { 
+          var diff_ms = Date.now() - dob.getTime();
+          var age_dt = new Date(diff_ms); 
 
-function calculate_age(dob) { 
-    var diff_ms = Date.now() - dob.getTime();
-    var age_dt = new Date(diff_ms); 
+          return Math.abs(age_dt.getUTCFullYear() - 1970);
+      }
 
-    return Math.abs(age_dt.getUTCFullYear() - 1970);
-}
+      function getUrlVars() {
+          var vars = {};
+          var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(m,key,value) {
+              vars[key] = value;
+          });
+          return vars;
+      }
 
-function getUrlVars() {
-    var vars = {};
-    var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(m,key,value) {
-        vars[key] = value;
-    });
-    return vars;
-}
-
-function getUrlParam(parameter, defaultvalue){
-    var urlparameter = defaultvalue;
-    if(window.location.href.indexOf(parameter) > -1){
-        urlparameter = getUrlVars()[parameter];
-        }
-    return urlparameter;
-}
+      function getUrlParam(parameter, defaultvalue){
+          var urlparameter = defaultvalue;
+          if(window.location.href.indexOf(parameter) > -1){
+              urlparameter = getUrlVars()[parameter];
+              }
+          return urlparameter;
+      }
 
 
-function main(){
-    var campaign = getUrlParam("c", "");
-    console.log(campaign)
-    if(campaign == ""){
-        window.location.href = '/index.html';
-    }
-    console.log(campaign)
-    campaign_id = campaign;
-    fetch_campaign(campaign);
-    fetch_faculties();
-}
+      function main(){
+          var campaign = getUrlParam("c", "");
+          console.log(campaign)
+          if(campaign == ""){
+              window.location.href = '/index.html';
+          }
+          console.log(campaign)
+          campaign_id = campaign;
+          fetch_campaign(campaign);
+          fetch_faculties();
+      }
 
-window.onload = main;
+      window.onload = main;
     </script>
   </body>
 </html>
