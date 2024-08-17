@@ -192,7 +192,8 @@ Volunteer projects are designed to contribute to the Sustainable Development Goa
             </div>
             <div class="column-row" style="margin-top: 0px;">   
               <input id="phone_field" type="text" name="name" placeholder="Phone">
-              <input id="dob_field" type="date" name="name" placeholder="Date of Birth">
+              <input class="textbox-n" id="dob_field" type="date" name="name" placeholder="Date of Birth"  onfocus="(this.type='date')"
+      onblur="(this.type='text')"> 
             </div>
             <div class="column-row" style="margin-top: 0px;">                  
                 <select id="gender_options" placeholder="Gender" name="Gender">
