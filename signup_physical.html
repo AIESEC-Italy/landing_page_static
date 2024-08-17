@@ -22,44 +22,49 @@
   </head>
   <body style="background-color: var(--aiesec);">
     <header>
-       <nav class="navbar">
-          <span class="navbar-toggle" id="js-navbar-toggle">
-              <i class="fas fa-bars"></i>
-          </span>
-          <a href="#" class="logo"><img src="assets/img/White-Blue-Logo.png" alt=""></a>
-          <ul class="main-nav" id="js-menu">
-            <li>
-              <a href="#" class="nav-links">Home</a>
-            </li>
-            <li>
-              <a href="#" class="nav-links">Volunteer Abroad</a>
-            </li>
-            <li>
-              <a href="#" class="nav-links">Intern Abroad</a>
-            </li>
-            <li>
-              <a href="#" class="nav-links">Teach Abroad</a>
-            </li>
-            <li>
-              <a href="#" class="nav-links">AIESEC Member</a>
-            </li>
-          </ul>
-        </nav>
-        <picture style="width: 100%">
-          <source
-            media="(max-width: 786px)"
-            srcset="assets/img/signup_form/signup_hero_mobile.png"
-          />
-          <source
-            media="(min-width: 787px)"
-            srcset="assets/img/signup_form/signup_hero.png"
-          />
-          <img
-            src="assets/img/signup_form/signup_hero.png"
-            alt=""
-            width="100%"
-          />
-        </picture>
+      <nav class="navbar">
+        <a href="/"><img class="logo" src="assets/img/White-Blue-Logo.png" alt=""></a>
+        <ul>
+          <li>
+            <a style="text-decoration: none;padding: 0 1.5rem;text-transform: uppercase;font-weight: 700;font-size: 17px;color: white;" href="/">Home</a>
+          </li>
+          <li >
+            <div class="programs-list" >
+              <div class="dropdown-head" style="color: white;font-weight: 700;font-size: 17px;" href="">Our Programs</div>
+              <div class="dropdown">
+                <ul class="dropdown-list">
+                  <li><a href="global_volunteer.html">Volunteer Abroad</a></li>
+                  <li><a href="global_talent.html">Intern Abroad</a></li>
+                  <li><a href="global_teacher.html">Teach Abroad</a></li>
+                </ul>
+              </div>
+              <!-- <i class="fa fa-angle-down"></i> -->
+            </div>
+          </li>
+        </ul>
+        <div class="hamburger">
+          <button>
+            <div class="bar"></div>
+          </button>
+        </div>
+      </nav>
+        <section class="signup_hero">
+          <picture style="width: 100%">
+            <source
+              media="(max-width: 786px)"
+              srcset="assets/img/signup_form/signup_hero_mobile.png"
+            />
+            <source
+              media="(min-width: 787px)"
+              srcset="assets/img/signup_form/signup_hero.png"
+            />
+            <img
+              src="assets/img/signup_form/signup_hero.png"
+              alt=""
+              width="100%"
+            />
+          </picture>
+        </section>
     </header>
     <main>
       <section class="signups-form-container container">
@@ -81,6 +86,8 @@
                     <option value="" disabled="" selected="">Gender</option>
                     <option value="Male">Male</option>
                     <option value="Female">Female</option>
+                    <option value="Female">Non-binary</option>
+                    <option value="Female">Prefere  not to say</option>
                 </select>
                 <input id="graduation_year_field" type="number" name="name" placeholder="Graduation Year">
             </div>
@@ -112,7 +119,6 @@
                   <option value="Can not See any benefit from going on exchange">Can not See any benefit from going on exchange</option>
                   <option value="I am not certain about AIESEC">I am not certain about AIESEC</option>
                   <option value="Can't find relevant time to travel">Can't find relevant time to travel</option>
-                  <option value="Can't travel beacause of COVID-19">Can't travel beacause of COVID-19</option>
                 </select>
                 <input id="aiesec_representative" type="text" name="aiesec_representative" placeholder="AIESEC Representative">
             </div>
@@ -120,18 +126,45 @@
               <span style="text-align: right;"><button id="signupbutton" class="button-secondary" style="text-align: right;" onclick="validate_form();">Confirm</button></span>
             </div>
 					</form>
-          <div id="form_msg" style="display: none; border: 4px;">
-                <span id="sign_up_error_msg" style="color: red;"></span>
-                <div class="alert__close" onclick="document.getElementById('form_msg').style.display = 'none';">×</div>
+          <div id="form_msg" style="display: none; border: 4px; justify-content: center;">
+                <span id="sign_up_error_msg" style="    color: white;
+    order: 2;
+    font-size: 20px;"></span>
           </div>
           </section>
     </main>
+    <div class="mobile-nav" style="display: none;">
+    <div class="nav-blocker"></div>
+    <div class="nav-content">    
+      <a style="  display: flex;justify-content: center;" href="/"><img class="logo" src="assets/img/White-Blue-Logo.png" alt=""></a>
+      <ul>
+        <li style="margin-top: 19px;">
+          <a style="text-decoration: none;color: white;;text-transform: uppercase;font-weight: 700;font-size: 22px;" href="/">Home</a>
+        </li>
+        <li>
+          <div class="programs-list" >
+            <div style="padding: 0; font-size: 22px;color: white;" id="dropdown-head-mob" class="dropdown-head" href="">Our Programs</div>
+            <div class="dropdown" >
+              <ul id="mob-dropdown" style="color: white;background: transparent;padding: 14px;border-bottom-left-radius: 15px;border-bottom-right-radius: 15px;position: absolute;top: 27px;width: 100%;display:block"  class="dropdown-list-mob">
+                <li><a href="global_volunteer.html">Volunteer Abroad</a></li>
+                <li><a href="global_talent.html">Intern Abroad</a></li>
+                <li><a href="global_teacher.html">Teach Abroad</a></li>
+              </ul>
+              <div class="list-cover" style="transform: translateY(1px)"></div>
+            </div>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
     <footer>
       <div class="footer-main container">
         <div class="footer-desciption" style="margin-top: 0;">
           <div class="footer-aiesec">
             <img src="assets/img/aiesec_black.png" alt="">
-            <p>AIESEC is a non-governmental not-for-profit organisation in consultative status with the United Nations Economic and Social Council (ECOSOC), affiliated with the UN DPI, member of ICMYO, and is recognized by UNESCO. AIESEC International is registered as a Foundation (Stichting), RSIN #807103895 in Rotterdam, The Netherlands.</p>
+            <p>AIESEC International Inc. is registered as a Not-for-profit Organization under the Canadian Not-for-profit Corporations Act-2018-02-08, Corporation Number 1055154-and Quebec Business Number (NEQ) 457178 in Montreal, Quebec, Canada.
+
+</p>
           </div>
           <div class="footer-links">
             <p>Products</p>
@@ -140,6 +173,14 @@
               <li><a href="">Global Talent</a></li>
               <li><a href="">Global Teacher</a></li>
               <li><a href="">AIESEC Member</a></li>
+            </ul>
+          </div>
+          <div class="footer-contacts">
+            <p>Contact us</p>
+            <ul>
+              <li><a href="tel:+39 351 805 0883">+39 351 805 0883</a></li>
+              <li><a href="mailto:contattaci@aiesec.it">contattaci@aiesec.it</a></li>
+              <li><a href="https://goo.gl/maps/Vy7xwhYb3RM2">AIESEC Italy | Via Saverio Altamura, 14, 20148, Milan – MI</a></li>
             </ul>
           </div>
         </div>
@@ -175,7 +216,7 @@ function validate_signup(data){
     console.log(data)
     $('#ogx_signup_form *').prop("disabled", false);
     if(data['data']['createPhysicalOgxLead'] != null){
-        window.location.href = '/thankyou_gt.html';
+        window.location.href = '/thankyou.html';
     }
     // Show the user that he Applied! Congrats!
 }
@@ -277,9 +318,9 @@ function validate_email(data){
         signup_request()
     }
     else{
-        var msg = "The email is registered before, please sign in.";
+        var msg = "Error: The email is registered before, please sign in.";
         document.getElementById('sign_up_error_msg').innerHTML = msg;
-        document.getElementById('form_msg').style.display = "block";
+        document.getElementById('form_msg').style.display = "flex";
         $('#ogx_signup_form *').prop("disabled", false);
     }
 }
@@ -334,39 +375,39 @@ function validate_form(){
     var gender_options = document.getElementById('gender_options')
     var gender = gender_options.options[gender_options.selectedIndex].value;
     if (firstname.length <= 0) {
-        var msg = "Please Enter Your First Name";
+        var msg = "Error: Please Enter Your First Name";
         document.getElementById('sign_up_error_msg').innerHTML = msg;
-        document.getElementById('form_msg').style.display = "block";
+        document.getElementById('form_msg').style.display = "flex";
         return ;
       }
     if (lastname.length <= 0) {
-        var msg = "Please Enter Your Last Name";
+        var msg = "Error: Please Enter Your Last Name";
         document.getElementById('sign_up_error_msg').innerHTML = msg;
-        document.getElementById('form_msg').style.display = "block";
+        document.getElementById('form_msg').style.display = "flex";
         return ;
       }
     if (email.length < 4) {
-        var msg = "Please Enter a valid email.";
+        var msg = "Error: Please Enter a valid email.";
         document.getElementById('sign_up_error_msg').innerHTML = msg;
-        document.getElementById('form_msg').style.display = "block";
+        document.getElementById('form_msg').style.display = "flex";
         return ;
       }
     if (email.includes(' ')){
-        var msg = "Please Remove Spaces from your email!";
+        var msg = "Error: Please Remove Spaces from your email!";
         document.getElementById('sign_up_error_msg').innerHTML = msg;
-        document.getElementById('form_msg').style.display = "block";
+        document.getElementById('form_msg').style.display = "flex";
         return ;
     }
     if (!email.includes('@') || !email.includes('.')){
-        var msg = "Please enter a valid email!";
+        var msg = "Error: Please enter a valid email!";
         document.getElementById('sign_up_error_msg').innerHTML = msg;
-        document.getElementById('form_msg').style.display = "block";
+        document.getElementById('form_msg').style.display = "flex";
         return ;
     }
     if (password.length <= 8) {
-        var msg = "Your password must be more than 8 characters";
+        var msg = "Error: Your password must be more than 8 characters";
         document.getElementById('sign_up_error_msg').innerHTML = msg;
-        document.getElementById('form_msg').style.display = "block";
+        document.getElementById('form_msg').style.display = "flex";
         return ;
       }
     
@@ -397,57 +438,57 @@ function validate_form(){
         i++;
     }
     if ( !numeric || !upperCase || !lowerCase ){
-        var msg = "Your password must contain a mixture of upper and lower case letters and at least one number";
+        var msg = "Error: Your password must contain a mixture of upper and lower case letters and at least one number";
         document.getElementById('sign_up_error_msg').innerHTML = msg;
-        document.getElementById('form_msg').style.display = "block";
+        document.getElementById('form_msg').style.display = "flex";
         return ; 
     }
     if (phone.length != 11) {
-        var msg = "Please enter a valid 11 digits phone number.";
+        var msg = "Error: Please enter a valid 11 digits phone number.";
         document.getElementById('sign_up_error_msg').innerHTML = msg;
-        document.getElementById('form_msg').style.display = "block";
+        document.getElementById('form_msg').style.display = "flex";
         return ;
       }
     if (dob.length <= 6) {
-        var msg = "Please enter a valid date of birth.";
+        var msg = "Error: Please enter a valid date of birth.";
         document.getElementById('sign_up_error_msg').innerHTML = msg;
-        document.getElementById('form_msg').style.display = "block";
+        document.getElementById('form_msg').style.display = "flex";
         return ;
       }
     if (calculate_age(new Date(document.getElementById('dob_field').value)) > 30 || calculate_age(new Date(document.getElementById('dob_field').value)) < 18 ){
-        var msg = "You need to be between the age of 18 and 30 to apply."
+        var msg = "Error: You need to be between the age of 18 and 30 to apply."
         document.getElementById('sign_up_error_msg').innerHTML = msg;
-        document.getElementById('form_msg').style.display = "block";
+        document.getElementById('form_msg').style.display = "flex";
         return ;
     }
     if (graduation_year.length != 4) {
-        var msg = "Please enter a valid graduation year."
+        var msg = "Error: Please enter a valid graduation year."
         document.getElementById('sign_up_error_msg').innerHTML = msg;
-        document.getElementById('form_msg').style.display = "block";
+        document.getElementById('form_msg').style.display = "flex";
         return ;
       }
     if (campus == ""){
-        var msg = "Please choose your University"
+        var msg = "Error: Please choose your University"
         document.getElementById('sign_up_error_msg').innerHTML = msg;
-        document.getElementById('form_msg').style.display = "block";
+        document.getElementById('form_msg').style.display = "flex";
         return ;
     }
     if (faculty == ""){
-        var msg = "Please choose your Faculty"
+        var msg = "Error: Please choose your Faculty"
         document.getElementById('sign_up_error_msg').innerHTML = msg;
-        document.getElementById('form_msg').style.display = "block";
+        document.getElementById('form_msg').style.display = "flex";
         return ;
     }
     if (gender == ""){
-        var msg = "Please choose your Gender"
+        var msg = "Error: Please choose your Gender"
         document.getElementById('sign_up_error_msg').innerHTML = msg;
-        document.getElementById('form_msg').style.display = "block";
+        document.getElementById('form_msg').style.display = "flex";
         return ;
     }
     if (product == ""){
-        var msg = "Please choose your Product"
+        var msg = "Error: Please choose your Product"
         document.getElementById('sign_up_error_msg').innerHTML = msg;
-        document.getElementById('form_msg').style.display = "block";
+        document.getElementById('form_msg').style.display = "flex";
         return ;
     }
     unique_email(email);
