@@ -1353,7 +1353,7 @@ li::marker {
 }
 .accordion button {
   position: relative;
-  display: block;
+  display: flex;
   text-align: left;
   width: 100%;
   padding: 1em 0;
@@ -1376,7 +1376,7 @@ li::marker {
   border: 1px solid white;
 }
 .accordion button .accordion-title {
-  padding: 1em 1.5em 1em 0;
+  padding: 0em 1.5em 0em 0;
 }
 .accordion button .icon {
   display: inline-block;

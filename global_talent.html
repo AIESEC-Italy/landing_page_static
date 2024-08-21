@@ -191,8 +191,7 @@ partners who are dedicated to provide an enriching experience.</p>
             </div>
             <div class="column-row" style="margin-top: 0px;">   
               <input id="phone_field" type="text" name="name" placeholder="Phone">
-              <input class="textbox-n" id="dob_field" type="date" name="name" placeholder="Date of Birth"  onfocus="(this.type='date')"
-      onblur="(this.type='text')">
+              <input class="textbox-n" id="dob_field" type="text" name="name" placeholder="Date of Birth"  onfocus="(this.type='date')"> 
             </div>
             <div class="column-row" style="margin-top: 0px;">                  
                 <select id="gender_options" placeholder="Gender" name="Gender">
@@ -206,7 +205,7 @@ partners who are dedicated to provide an enriching experience.</p>
             </div>
             <div class="column-row" style="margin-top: 0px;">
                 <select id="faculty_options" placeholder="Faculty" name="faculty">
-                    <option value="" disabled="" selected="">Faculty</option>
+                    <option value="" disabled="" selected="">Background</option>
                 </select>                       
                 <select id="campus_options" placeholder="Campus" name="campus">
                     <option value="" disabled="" selected="">Campus</option>
@@ -781,7 +780,7 @@ function validate_form(){
 }
 
 function inject_campuses(data){
-    var campuses = data['data']['allCampuses']['edges'];
+    var campuses = data
     campuses.forEach(function(element) {
         var $log = $( "#campus_options" ),
         str = '<option value="' + element['node'].id + '">' + element['node'].name + '</option>',
@@ -802,24 +801,31 @@ function inject_faculties(data){
     });
 }
 
+async function fetch_campuses() {
+  let allCampuses = [];
+  let hasNextPage = true;
+  let endCursor = null;
 
-function fetch_campuses(){
-    var query = `query Myquery {
-      allCampuses
-      {
-        edges
-        {
-          node
-          {
-            id
-            name
-            alignmentId
+  while (hasNextPage) {
+    let query = `
+      query MyQuery($cursor: String) {
+        allCampuses(first: 100, after: $cursor) {
+          edges {
+            node {
+              id
+              name
+              alignmentId
+            }
+          }
+          pageInfo {
+            endCursor
+            hasNextPage
           }
         }
       }
-    }`;
+    `;
 
-    data_ = fetch(endpoint + '/graphql', {
+    let response = await fetch(endpoint + '/graphql', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -827,12 +833,24 @@ function fetch_campuses(){
       },
       body: JSON.stringify({
         query,
+        variables: { cursor: endCursor }
       })
-    })
-      .then(r => r.json())
-      .then(data => inject_campuses(data));
-    //console.log(data_);
+    });
+
+    let data = await response.json();
+
+    // Add the current page of campuses to the array
+    allCampuses = allCampuses.concat(data.data.allCampuses.edges);
+
+    // Update pagination variables
+    hasNextPage = data.data.allCampuses.pageInfo.hasNextPage;
+    endCursor = data.data.allCampuses.pageInfo.endCursor;
+  }
+
+  // Process all campuses at once after fetching all pages
+  inject_campuses(allCampuses);
 }
+
 function fetch_faculties(){
     var query = `query Myquery {
       allFaculties
