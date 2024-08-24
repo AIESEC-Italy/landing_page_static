@@ -252,7 +252,7 @@
           console.log(reason_to_prevent)
           
           var query = ` mutation CreateOgxLead($firstname: String!, $lastname: String!, $email: String!, $password: String!, $phone: String!, $campus: ID!, $faculty: ID!, $referral: ID!,$dob: Date!, $ogxBranch: Int!, $graduationYear: Int!, $gender: String!,$campaign_id: ID!, $apply_reason: String!, $prevent_resaon: String!) {
-          createPhysicalOgxLead(firstName:$firstname,lastName:$lastname,email:$email,password:$password,phone:$phone,campus:$campus,faculty:$faculty,referral:$referral,dob:$dob, ogxBranch:$ogxBranch,graduationYear:$graduationYear,  gender:$gender,marketingCampaign:$campaign_id, reasonToApply:$apply_reason, reasonToPrevent:$prevent_resaon)
+          createOgxLead(firstName:$firstname,lastName:$lastname,email:$email,password:$password,phone:$phone,campus:$campus,faculty:$faculty,referral:$referral,dob:$dob, ogxBranch:$ogxBranch,graduationYear:$graduationYear,  gender:$gender,marketingCampaign:$campaign_id, reasonToApply:$apply_reason, reasonToPrevent:$prevent_resaon)
         {
               applicant {
                   id
