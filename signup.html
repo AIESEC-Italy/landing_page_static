@@ -213,7 +213,7 @@
       function validate_signup(data){
           console.log(data)
           $('#ogx_signup_form *').prop("disabled", false);
-          if(data['data']['createPhysicalOgxLead'] != null){
+          if(data['data']['createOgxLead'] != null){
               window.location.href = '/thankyou.html';
           }
           // Show the user that he Applied! Congrats!
