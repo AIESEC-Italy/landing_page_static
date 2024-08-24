@@ -730,12 +730,12 @@ function validate_form(){
         document.getElementById('form_msg').style.display = "flex";
         return ; 
     }
-    if (phone.length != 11) {
-        var msg = "Error: Please enter a valid 11 digits phone number.";
-        document.getElementById('sign_up_error_msg').innerHTML = msg;
-        document.getElementById('form_msg').style.display = "flex";
-        return ;
-      }
+    if (phone.length < 10) {
+              var msg = "Error: Please enter a valid phone number.";
+              document.getElementById('sign_up_error_msg').innerHTML = msg;
+              document.getElementById('form_msg').style.display = "flex";
+              return ;
+            }
     if (dob.length <= 6) {
         var msg = "Error: Please enter a valid date of birth.";
         document.getElementById('sign_up_error_msg').innerHTML = msg;
