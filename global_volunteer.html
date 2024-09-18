@@ -19,6 +19,7 @@
       ><link rel=stylesheet
       href=assets/vendors/fontawesome/css/all.min.css></noscript
     >
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
     <!-- Hotjar Tracking Code for https://aiesec.it/ -->
     <script>
         (function(h,o,t,j,a,r){
@@ -219,7 +220,7 @@ Volunteer projects are designed to contribute to the Sustainable Development Goa
                 <select id="faculty_options" placeholder="Faculty" name="faculty">
                     <option value="" disabled="" selected="">Background</option>
                 </select>                       
-                <select id="campus_options" placeholder="Campus" name="campus">
+                <select id="campus_options" placeholder="Campus" name="campus" class="js-example-basic-single">
                     <option value="" disabled="" selected="">Campus</option>
                 </select>
             </div>
@@ -403,6 +404,7 @@ Volunteer projects are designed to contribute to the Sustainable Development Goa
     <script src="assets/js/script.js"></script>
     <script src="assets/vendors/jquery/jquery.min.js"></script>
     <script src="assets/vendors/odometer/odometer.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
     <script>
       document.addEventListener("scroll", function() {
           const targetSection = document.getElementById('gv-signup');
@@ -1032,6 +1034,9 @@ function main(){
 }
 
 window.onload = main;
+$(document).ready(function() {
+    $('.js-example-basic-single').select2();
+});
     </script>
   </body>
 </html>
